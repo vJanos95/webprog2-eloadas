@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\GradeController;
 
 Route::get('/', function () {
     return redirect()->route('introduction');
@@ -91,4 +92,21 @@ Route::middleware('role:1')->group(function () {
     Route::delete('/subjects/{id}', [SubjectController::class, 'destroy'])
         ->name('subjects.destroy');
 });
+Route::get('/grades', [GradeController::class, 'index'])
+    ->name('grades.index');
+
+Route::get('/grades/create', [GradeController::class, 'create'])
+    ->name('grades.create');
+
+Route::post('/grades', [GradeController::class, 'store'])
+    ->name('grades.store');
+
+Route::get('/grades/{id}/edit', [GradeController::class, 'edit'])
+    ->name('grades.edit');
+
+Route::put('/grades/{id}', [GradeController::class, 'update'])
+    ->name('grades.update');
+
+Route::delete('/grades/{id}', [GradeController::class, 'destroy'])
+    ->name('grades.destroy');
 });
