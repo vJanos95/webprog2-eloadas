@@ -3907,3 +3907,115 @@ input, select, textarea {
 			}
 
 		}
+/* Laravel navigáció – HTML5 UP kompatibilis kiegészítés */
+
+.site-header {
+    position: relative;
+    z-index: 10001;
+    display: block;
+    width: 100%;
+    background-color: #5e42a6;
+    padding: 0;
+    overflow: visible;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.25rem 2rem;
+}
+
+.site-brand {
+    display: inline-block;
+    position: relative;
+    z-index: 10002;
+    color: #fff !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+.main-nav {
+    display: flex !important;
+    position: relative;
+    z-index: 10002;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    overflow: visible;
+}
+
+.main-nav .nav-link {
+    display: inline-block !important;
+    position: relative;
+    z-index: 10003;
+    height: auto;
+    line-height: 1.75;
+    padding: 0.4rem 0.25rem;
+    border: 0;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active {
+    color: #fff !important;
+}
+
+.main-nav .nav-user {
+    position: relative;
+    z-index: 10003;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+}
+
+.main-nav .logout-form {
+    display: inline-block;
+    position: relative;
+    z-index: 10003;
+    margin: 0;
+}
+
+.main-nav .nav-button {
+    position: relative;
+    z-index: 10003;
+    display: inline-block;
+    padding: 0.4rem 0.25rem;
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.main-nav .nav-button:hover {
+    color: #fff;
+    background: transparent;
+}
+
+@media screen and (max-width: 736px) {
+    .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1rem 1.25rem;
+    }
+
+    .main-nav {
+        justify-content: flex-start;
+        width: 100%;
+        gap: 0.4rem 0.8rem;
+    }
+}

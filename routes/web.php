@@ -8,7 +8,9 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\GradeController;
 
 Route::get('/', function () {
-    return redirect()->route('introduction');
+    return auth()->check()
+        ? redirect()->route('user')
+        : redirect()->route('introduction');
 })->name('home');
 
 Route::get('/introduction', function () {
