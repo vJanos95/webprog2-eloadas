@@ -130,16 +130,16 @@ Route::middleware('role:1')->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
         ->name('users.destroy');
 });
-Route::middleware('role:1')->group(function () {
-    Route::get('/admin/database-import', function () {
-        return view('admin.database-import');
-    })->name('admin.database-import');
-
-    Route::post(
-        '/admin/database-import',
-        [\App\Http\Controllers\DatabaseImportController::class, 'import']
-    )->name('admin.database-import.store');
-});
+//Route::middleware('role:1')->group(function () {
+//    Route::get('/admin/database-import', function () {
+//        return view('admin.database-import');
+//    })->name('admin.database-import');
+//
+//    Route::post(
+//        '/admin/database-import',
+//        [\App\Http\Controllers\DatabaseImportController::class, 'import']
+//    )->name('admin.database-import.store');
+//});
 Route::get('/grades', [GradeController::class, 'index'])
     ->name('grades.index');
 
