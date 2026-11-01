@@ -22,9 +22,8 @@ Route::get('/introduction', function () {
     return view('introduction');
 })->name('introduction');
 
-Route::get('/exercise1', function () {
-    return view('view1');
-});
+Route::get('/diagram', [ChartController::class, 'index'])
+    ->name('charts.index');
 
 // Bejelentkezés és regisztráció
 Route::middleware('guest')->group(function () {
@@ -45,16 +44,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/kapcsolat', [ContactController::class, 'store'])
         ->name('contact.store');
 
-    Route::get('/diagram', [ChartController::class, 'index'])
-        ->name('charts.index');
     Route::get('/kapcsolat', [ContactController::class, 'create'])
         ->name('contact.create');
 
     Route::post('/kapcsolat', [ContactController::class, 'store'])
         ->name('contact.store');
 
-    Route::get('/diagram', [ChartController::class, 'index'])
-        ->name('charts.index');
 });
 
 // Csak bejelentkezett felhasználók
@@ -82,15 +77,10 @@ Route::middleware('auth')->group(function () {
     // Üzenetek megtekintése: csak bejelentkezett felhasználók
     Route::get('/uzenetek', [ContactController::class, 'index'])
         ->name('messages.index');
-    Route::get('/diagram', [ChartController::class, 'index'])
-        ->name('charts.index');
 
     // Üzenetek megtekintése: csak bejelentkezett felhasználók
     Route::get('/uzenetek', [ContactController::class, 'index'])
         ->name('messages.index');
-    Route::get('/diagram', [ChartController::class, 'index'])
-        ->name('charts.index');
-
 // Diákok kezelése: csak admin
 Route::middleware('role:1')->group(function () {
     Route::get('/students/create', [StudentController::class, 'create'])

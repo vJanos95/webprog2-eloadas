@@ -31,42 +31,42 @@
                 </li>
 
                 @auth
-                    <li>
-                        <a href="{{ route('students.index') }}">Diákok</a>
-                    </li>
+                <li>
+                    <a href="{{ route('students.index') }}">Diákok</a>
+                </li>
 
-                    <li>
-                        <a href="{{ route('subjects.index') }}">Tantárgyak</a>
-                    </li>
+                <li>
+                    <a href="{{ route('subjects.index') }}">Tantárgyak</a>
+                </li>
 
-                    <li>
-                        <a href="{{ route('grades.index') }}">Jegyek</a>
-                    </li>
+                <li>
+                    <a href="{{ route('grades.index') }}">Jegyek</a>
+                </li>
 
-                    <li>
-                        <a href="{{ route('messages.index') }}">Üzenetek</a>
-                    </li>
+                <li>
+                    <a href="{{ route('messages.index') }}">Üzenetek</a>
+                </li>
 
-                    @if ((int) auth()->user()->role === 1)
-                        <li>
-                            <a href="{{ route('admin') }}">Adminisztráció</a>
-                        </li>
-                    @endif
-
+                @if ((int) auth()->user()->role === 1)
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit">Kijelentkezés</button>
-                        </form>
+                        <a href="{{ route('admin') }}">Adminisztráció</a>
                     </li>
+                @endif
+
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Kijelentkezés</button>
+                    </form>
+                </li>
                 @else
-                    <li>
-                        <a href="{{ route('login') }}">Bejelentkezés</a>
-                    </li>
+                <li>
+                    <a href="{{ route('login') }}">Bejelentkezés</a>
+                </li>
 
-                    <li>
-                        <a href="{{ route('register') }}">Regisztráció</a>
-                    </li>
+                <li>
+                    <a href="{{ route('register') }}">Regisztráció</a>
+                </li>
                 @endauth
             </ul>
           </nav>
