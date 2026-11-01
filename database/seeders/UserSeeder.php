@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insertOrIgnore([
-            'name' => 'admin',
+            'name' => 'Rendszergazda',
             'username' => 'admin',
             'password' => Hash::make('admin'),
             'role' => 1,

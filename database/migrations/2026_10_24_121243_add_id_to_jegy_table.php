@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -9,16 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('jegy', function (Blueprint $table) {
-            $table->increments('id')->first();
-        });
+        if (Schema::hasTable('jegy') && !Schema::hasColumn('jegy', 'id')) {
+            Schema::table('jegy', function (Blueprint $table) {
+                $table->increments('id')->first();
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('jegy', function (Blueprint $table) {
-            $table->dropPrimary(['id']);
-            $table->dropColumn('id');
-        });
     }
 };
