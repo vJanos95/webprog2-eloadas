@@ -17,29 +17,58 @@
   <section id="sidebar">
       <div class="inner">
           <nav>
-              <ul>
-                  <li><a href="{{ route('introduction') }}">Főoldal</a></li>
+            <ul>
+                <li>
+                    <a href="{{ route('introduction') }}">Főoldal</a>
+                </li>
 
-                  @auth
-                      <li><a href="{{ route('students.index') }}">Diákok</a></li>
-                      <li><a href="{{ route('subjects.index') }}">Tantárgyak</a></li>
-                      <li><a href="{{ route('grades.index') }}">Jegyek</a></li>
+                <li>
+                    <a href="{{ route('contact.create') }}">Kapcsolat</a>
+                </li>
 
-                      @if ((int) auth()->user()->role === 1)
-                          <li><a href="{{ route('admin') }}">Adminisztráció</a></li>
-                      @endif
+                <li>
+                    <a href="{{ route('charts.index') }}">Diagram</a>
+                </li>
 
-                      <li>
-                          <form method="POST" action="{{ route('logout') }}">
-                              @csrf
-                              <button type="submit">Kijelentkezés</button>
-                          </form>
-                      </li>
-                  @else
-                      <li><a href="{{ route('login') }}">Bejelentkezés</a></li>
-                      <li><a href="{{ route('register') }}">Regisztráció</a></li>
-                  @endauth
-              </ul>
+                @auth
+                    <li>
+                        <a href="{{ route('students.index') }}">Diákok</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('subjects.index') }}">Tantárgyak</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('grades.index') }}">Jegyek</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('messages.index') }}">Üzenetek</a>
+                    </li>
+
+                    @if ((int) auth()->user()->role === 1)
+                        <li>
+                            <a href="{{ route('admin') }}">Adminisztráció</a>
+                        </li>
+                    @endif
+
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Kijelentkezés</button>
+                        </form>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}">Bejelentkezés</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('register') }}">Regisztráció</a>
+                    </li>
+                @endauth
+            </ul>
           </nav>
       </div>
   </section>
@@ -55,7 +84,7 @@
         <div class="inner">
             <ul class="menu">
                 <li>Iskolai napló</li>
-                <li>Készítők: Varga János Zoltán - BKD4P6 / Bencze Szabolcs - </li>
+                <li>Készítők: Varga János Zoltán - BKD4P6 / Bencze Szabolcs - O71J6P</li>
                 <li>Design: <a href="https://html5up.net/hyperspace">Hyperspace by HTML5 UP</a></li>
             </ul>
         </div>

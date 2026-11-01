@@ -6,6 +6,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ChartController;
 
 Route::get('/', function () {
     return auth()->check()
@@ -34,6 +36,14 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [AdminController::class, 'register'])
         ->name('register.store');
+    Route::get('/kapcsolat', [ContactController::class, 'create'])
+        ->name('contact.create');
+
+    Route::post('/kapcsolat', [ContactController::class, 'store'])
+        ->name('contact.store');
+
+    Route::get('/diagram', [ChartController::class, 'index'])
+        ->name('charts.index');
 });
 
 // Csak bejelentkezett felhasználók
@@ -53,8 +63,14 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:1')
         ->name('admin');
         // Diákok listázása: admin és tanár
-Route::get('/students', [StudentController::class, 'index'])
-    ->name('students.index');
+    Route::get('/students', [StudentController::class, 'index'])
+        ->name('students.index');
+
+    // Üzenetek megtekintése: csak bejelentkezett felhasználók
+    Route::get('/uzenetek', [ContactController::class, 'index'])
+        ->name('messages.index');
+    Route::get('/diagram', [ChartController::class, 'index'])
+        ->name('charts.index');
 
 // Diákok kezelése: csak admin
 Route::middleware('role:1')->group(function () {
@@ -113,6 +129,16 @@ Route::middleware('role:1')->group(function () {
 
     Route::delete('/users/{user}', [UserController::class, 'destroy'])
         ->name('users.destroy');
+});
+Route::middleware('role:1')->group(function () {
+    Route::get('/admin/database-import', function () {
+        return view('admin.database-import');
+    })->name('admin.database-import');
+
+    Route::post(
+        '/admin/database-import',
+        [\App\Http\Controllers\DatabaseImportController::class, 'import']
+    )->name('admin.database-import.store');
 });
 Route::get('/grades', [GradeController::class, 'index'])
     ->name('grades.index');
