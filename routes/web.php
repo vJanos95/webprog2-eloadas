@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\AdminController;
@@ -6,9 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ChartController;
 
 Route::get('/', function () {
-    return redirect()->route('introduction');
+    return auth()->check()
+        ? redirect()->route('user')
+        : redirect()->route('introduction');
 })->name('home');
 
 Route::get('/introduction', function () {
@@ -32,6 +36,14 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [AdminController::class, 'register'])
         ->name('register.store');
+    Route::get('/kapcsolat', [ContactController::class, 'create'])
+        ->name('contact.create');
+
+    Route::post('/kapcsolat', [ContactController::class, 'store'])
+        ->name('contact.store');
+
+    Route::get('/diagram', [ChartController::class, 'index'])
+        ->name('charts.index');
 });
 
 // Csak bejelentkezett felhasználók
@@ -51,8 +63,14 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:1')
         ->name('admin');
         // Diákok listázása: admin és tanár
-Route::get('/students', [StudentController::class, 'index'])
-    ->name('students.index');
+    Route::get('/students', [StudentController::class, 'index'])
+        ->name('students.index');
+
+    // Üzenetek megtekintése: csak bejelentkezett felhasználók
+    Route::get('/uzenetek', [ContactController::class, 'index'])
+        ->name('messages.index');
+    Route::get('/diagram', [ChartController::class, 'index'])
+        ->name('charts.index');
 
 // Diákok kezelése: csak admin
 Route::middleware('role:1')->group(function () {
@@ -91,6 +109,26 @@ Route::middleware('role:1')->group(function () {
 
     Route::delete('/subjects/{id}', [SubjectController::class, 'destroy'])
         ->name('subjects.destroy');
+});
+// Felhasználók kezelése: kizárólag admin
+Route::middleware('role:1')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])
+        ->name('users.index');
+
+    Route::get('/users/create', [UserController::class, 'create'])
+        ->name('users.create');
+
+    Route::post('/users', [UserController::class, 'store'])
+        ->name('users.store');
+
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])
+        ->name('users.edit');
+
+    Route::put('/users/{user}', [UserController::class, 'update'])
+        ->name('users.update');
+
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])
+        ->name('users.destroy');
 });
 Route::get('/grades', [GradeController::class, 'index'])
     ->name('grades.index');

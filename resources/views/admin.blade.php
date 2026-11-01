@@ -1,6 +1,21 @@
 <x-mainpage>
-  <h1>Admin page</h1>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  Nunc pellentesque posuere nunc, at laoreet augue. Donec
-  ultricies eu mi sit amet dictum. Maecenas ut posuere
+    <h1>Adminisztráció</h1>
+
+    <p>
+        Az adminisztrációs felületen kezelheted az alkalmazás adatait
+        és felhasználóit.
+    </p>
+
+    <h2>Felhasználók</h2>
+
+    <p>
+        Itt megtekintheted, létrehozhatod, módosíthatod és törölheted
+        a rendszer felhasználóit.
+    </p>
+
+    <p>
+        <a href="{{ route('users.index') }}">
+            Felhasználók kezelése
+        </a>
+    </p>
 </x-mainpage>

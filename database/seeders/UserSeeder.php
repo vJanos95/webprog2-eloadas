@@ -1,27 +1,22 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'User1', 
-            'email' => 'aaa@aaa.hu', 
-            'password' => bcrypt('aaaaaaaa'), 
-        ]);
-        DB::table('users')->insert([
-            'name' => 'admin', 
-            'email' => 'bbb@bbb', 
-            'password' => bcrypt('bbbbbbbb'), 
-            'role' => 1, 
+        DB::table('users')->insertOrIgnore([
+            'name' => 'admin',
+            'username' => 'admin',
+            'password' => Hash::make('admin'),
+            'role' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
