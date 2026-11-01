@@ -8,8 +8,14 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ChartController;
 
 Route::get('/', function () {
+    return auth()->check()
+        ? redirect()->route('user')
+        : redirect()->route('introduction');
     return auth()->check()
         ? redirect()->route('user')
         : redirect()->route('introduction');
@@ -44,6 +50,14 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/diagram', [ChartController::class, 'index'])
         ->name('charts.index');
+    Route::get('/kapcsolat', [ContactController::class, 'create'])
+        ->name('contact.create');
+
+    Route::post('/kapcsolat', [ContactController::class, 'store'])
+        ->name('contact.store');
+
+    Route::get('/diagram', [ChartController::class, 'index'])
+        ->name('charts.index');
 });
 
 // Csak bejelentkezett felhasználók
@@ -65,6 +79,14 @@ Route::middleware('auth')->group(function () {
         // Diákok listázása: admin és tanár
     Route::get('/students', [StudentController::class, 'index'])
         ->name('students.index');
+    Route::get('/students', [StudentController::class, 'index'])
+        ->name('students.index');
+
+    // Üzenetek megtekintése: csak bejelentkezett felhasználók
+    Route::get('/uzenetek', [ContactController::class, 'index'])
+        ->name('messages.index');
+    Route::get('/diagram', [ChartController::class, 'index'])
+        ->name('charts.index');
 
     // Üzenetek megtekintése: csak bejelentkezett felhasználók
     Route::get('/uzenetek', [ContactController::class, 'index'])
