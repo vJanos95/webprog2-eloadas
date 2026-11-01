@@ -18,7 +18,7 @@
       <div class="inner">
           <nav>
               <ul>
-                  <li><a href="{{ route('introduction') }}">Kezdőlap</a></li>
+                  <li><a href="{{ route('introduction') }}">Főoldal</a></li>
 
                   @auth
                       <li><a href="{{ route('students.index') }}">Diákok</a></li>

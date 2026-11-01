@@ -9,7 +9,7 @@
                 href="{{ auth()->check() ? route('dashboard') : route('introduction') }}"
                 class="nav-link"
             >
-                Kezdőlap
+                Főoldal
             </a>
 
             @auth
